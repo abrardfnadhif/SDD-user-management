@@ -23,9 +23,9 @@
 ## Phase 3.2: Tests First (TDD) — Contract & Integration Tests
 - [x] T011 [P] Contract test POST /api/register in `backend/tests/contract/test_register_post.py` (qa)
 - [x] T012 [P] Contract test POST /api/login in `backend/tests/contract/test_login_post.py` (qa)
-- [ ] T013 [P] Contract test POST /api/token/refresh in `backend/tests/contract/test_refresh_post.py` (qa)
-- [ ] T014 [P] Contract test POST /api/2fa/enable in `backend/tests/contract/test_2fa_enable_post.py` (qa)
-- [ ] T015 [P] Contract test POST /api/2fa/verify in `backend/tests/contract/test_2fa_verify_post.py` (qa)
+- [x] T013 [P] Contract test POST /api/token/refresh in `backend/tests/contract/test_refresh_post.py` (qa)
+- [x] T014 [P] Contract test POST /api/2fa/enable in `backend/tests/contract/test_2fa_enable_post.py` (qa)
+- [x] T015 [P] Contract test POST /api/2fa/verify in `backend/tests/contract/test_2fa_verify_post.py` (qa)
 - [ ] T016 [P] Contract test GET /api/profile in `backend/tests/contract/test_profile_get.py` (qa)
 - [ ] T017 [P] Contract test PUT /api/profile in `backend/tests/contract/test_profile_put.py` (qa)
 - [ ] T018 [P] Contract test GET /api/admin/users/{id} in `backend/tests/contract/test_admin_users_get.py` (qa)
