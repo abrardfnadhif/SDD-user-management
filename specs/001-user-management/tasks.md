@@ -39,7 +39,7 @@
 - [x] T026 [P] Frontend E2E: auth and profile flows in `frontend/tests/e2e/auth.spec.ts` (qa)
 
 ## Phase 3.3: Core Implementation (Backend)
-- [ ] T027 [P] Create DB session and config in `backend/src/db/session.py` (db)
+- [x] T027 [P] Create DB session and config in `backend/src/db/session.py` (db)
 - [ ] T028 [P] Create models: `User`, `Role`, `UserRole`, `AuditLog` in `backend/src/models/{user.py,role.py,audit_log.py,user_role.py}` (db)
 - [ ] T029 [P] Create models: `EmailVerificationToken`, `PasswordResetToken`, `BackupCode` in `backend/src/models/tokens.py` (db)
 - [ ] T030 [P] Implement UserService in `backend/src/services/user_service.py` (backend)
