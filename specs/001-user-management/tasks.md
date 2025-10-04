@@ -54,7 +54,7 @@
 - [x] T039 Implement admin user endpoints in `backend/src/api/admin.py` (GET/PUT/DELETE, POST role) (backend)
 - [x] T040 Enforce last-admin rule in admin endpoints (cannot delete/demote last Admin) in `backend/src/api/admin.py` (backend)
 - [x] T041 Implement account deletion scheduling and cancellation window logic in `backend/src/services/user_service.py` (backend)
-- [ ] T042 Add logging for auth success/failure, authorization failures, admin actions, sensitive access in `backend/src/services/*` (backend)
+- [x] T042 Add logging for auth success/failure, authorization failures, admin actions, sensitive access in `backend/src/services/*` (backend)
 
 ## Phase 3.4: Core Implementation (Frontend)
 - [ ] T043 [P] Implement Register page and form with validation at `frontend/src/pages/register.tsx` (frontend)
