@@ -31,20 +31,10 @@ npm run build
 # Run production server
 npm start
 
-# Run linter
-npm run lint
-```
-
-### One-line Dev Setup
-See root `Makefile` for automated setup with backend and database.
-
-### Adding shadcn/ui Components
-```bash
-npx shadcn@latest add button
-npx shadcn@latest add form
-npx shadcn@latest add input
-# etc.
-```
-
-## Development
-Open [http://localhost:3000](http://localhost:3000) to view the app.
+# Code quality (zero-error policy)
+npm run lint              # Lint with max-warnings 0
+npm run lint:fix          # Auto-fix linting issues
+npm run format            # Format code with Prettier
+npm run format:check      # Check formatting
+npm run type-check        # TypeScript type checking
+npm run validate          # Run all checks (type + lint + format)
