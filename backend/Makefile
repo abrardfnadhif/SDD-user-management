@@ -1,8 +1,19 @@
-.PHONY: install lint format type-check test clean
+.PHONY: install dev lint format type-check test clean
 
 # Install dependencies
 install:
 	pip install -r requirements-dev.txt
+
+# Run development server
+dev:
+	@if [ ! -d "venv" ]; then \
+		echo "Virtual environment not found. Creating one..."; \
+		python3.11 -m venv venv; \
+		echo "Installing dependencies..."; \
+		./venv/bin/pip install -r requirements-dev.txt; \
+	fi
+	@echo "Starting FastAPI server on http://localhost:8000"
+	./venv/bin/uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
 
 # Run linter (zero-error policy)
 lint:
