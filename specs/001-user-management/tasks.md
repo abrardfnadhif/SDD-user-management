@@ -14,7 +14,7 @@
 - [x] T003 Initialize frontend Next.js TypeScript app; add Tailwind, shadcn/ui in `frontend/` (devops)
 - [x] T004 [P] Configure ESLint/Prettier and zero-error policy for frontend in `frontend/.eslintrc` and `frontend/package.json` (devops)
 - [x] T005 [P] Configure ruff/flake8 or linters for backend in `backend/pyproject.toml` with function length guidance (devops)
-- [ ] T006 Create `.env.sample` for backend and frontend; document secrets in `README.md` (devops)
+- [x] T006 Create `.env.sample` for backend and frontend; document secrets in `README.md` (devops)
 - [ ] T007 Create `docker-compose.yml` for postgres, backend, (optional) reverse proxy at repo root (devops)
 - [ ] T008 Add Makefile scripts: `make dev` one-liner to start services and seed roles at `/Users/abrar.d.f.nadhif/project/SDD-FS/Makefile` (devops)
 - [ ] T009 Add base pages and routes: `/login`, `/register`, `/profile`, `/admin/users` in `frontend/src/pages/*.tsx` (frontend)
