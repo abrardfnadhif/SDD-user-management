@@ -18,7 +18,7 @@ class AuditLogService:
         target_type: str,
         target_id: uuid.UUID,
         actor_id: Optional[uuid.UUID] = None,
-        metadata: Optional[dict] = None,
+        details: Optional[dict] = None,
     ) -> AuditLog:
         """
         Create audit log entry (append-only)
@@ -28,14 +28,14 @@ class AuditLogService:
             target_type: Type of target (e.g., user, role)
             target_id: ID of target entity
             actor_id: ID of user performing action (None for system)
-            metadata: Additional metadata (no raw PII)
+            details: Additional details (no raw PII)
         """
         audit_log = AuditLog(
             actor_id=actor_id,
             action=action,
             target_type=target_type,
             target_id=target_id,
-            metadata=metadata or {},
+            details=details or {},
             timestamp=datetime.utcnow(),
         )
         db.add(audit_log)
@@ -50,11 +50,11 @@ class AuditLogService:
         db: AsyncSession,
         user_id: uuid.UUID,
         actor_id: Optional[uuid.UUID] = None,
-        metadata: Optional[dict] = None,
+        details: Optional[dict] = None,
     ) -> AuditLog:
         """Log user creation"""
         return await AuditLogService.log(
-            db, "USER_CREATED", "user", user_id, actor_id, metadata
+            db, "USER_CREATED", "user", user_id, actor_id, details
         )
 
     @staticmethod
@@ -93,16 +93,16 @@ class AuditLogService:
 
     @staticmethod
     async def log_login_success(
-        db: AsyncSession, user_id: uuid.UUID, metadata: Optional[dict] = None
+        db: AsyncSession, user_id: uuid.UUID, details: Optional[dict] = None
     ) -> AuditLog:
         """Log successful login"""
         return await AuditLogService.log(
-            db, "LOGIN_SUCCESS", "user", user_id, user_id, metadata
+            db, "LOGIN_SUCCESS", "user", user_id, user_id, details
         )
 
     @staticmethod
     async def log_login_failure(
-        db: AsyncSession, email: str, metadata: Optional[dict] = None
+        db: AsyncSession, email: str, details: Optional[dict] = None
     ) -> AuditLog:
         """Log failed login attempt"""
         # Use a dummy UUID for failed logins (no user_id available)
@@ -113,7 +113,7 @@ class AuditLogService:
             "user",
             dummy_id,
             None,
-            {**(metadata or {}), "email": email},
+            {**(details or {}), "email": email},
         )
 
     @staticmethod
@@ -193,7 +193,7 @@ class AuditLogService:
         admin_id: uuid.UUID,
         action: str,
         target_id: uuid.UUID,
-        metadata: Optional[dict] = None,
+        details: Optional[dict] = None,
     ) -> AuditLog:
         """Log admin action"""
         return await AuditLogService.log(
@@ -202,5 +202,5 @@ class AuditLogService:
             "user",
             target_id,
             admin_id,
-            metadata,
+            details,
         )
