@@ -22,7 +22,14 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 
     def __init__(self, app, csp_policy: str = None, hsts_max_age: int = 31536000):
         super().__init__(app)
-        self.csp_policy = csp_policy or "default-src 'self'"
+        # Relaxed CSP for API docs (Swagger UI and ReDoc)
+        self.csp_policy = csp_policy or (
+            "default-src 'self'; "
+            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; "
+            "font-src 'self' https://fonts.gstatic.com; "
+            "img-src 'self' data: https://fastapi.tiangolo.com"
+        )
         self.hsts_max_age = hsts_max_age
 
     async def dispatch(self, request: Request, call_next):
@@ -30,6 +37,7 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 
         # Content Security Policy
         # Prevents XSS and data injection attacks
+        # Relaxed for /docs and /redoc endpoints
         response.headers["Content-Security-Policy"] = self.csp_policy
 
         # HTTP Strict Transport Security
