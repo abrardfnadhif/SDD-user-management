@@ -1,0 +1,44 @@
+.PHONY: install lint format type-check test clean
+
+# Install dependencies
+install:
+	pip install -r requirements-dev.txt
+
+# Run linter (zero-error policy)
+lint:
+	ruff check .
+
+# Auto-fix linting issues
+lint-fix:
+	ruff check --fix .
+
+# Format code
+format:
+	black .
+
+# Check formatting
+format-check:
+	black --check .
+
+# Type checking
+type-check:
+	mypy src/
+
+# Run all quality checks
+validate: type-check lint format-check
+	@echo "✓ All quality checks passed"
+
+# Run tests
+test:
+	pytest
+
+# Run tests with coverage
+test-cov:
+	pytest --cov=src --cov-report=html --cov-report=term
+
+# Clean build artifacts
+clean:
+	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+	find . -type f -name "*.pyc" -delete
+	find . -type d -name "*.egg-info" -exec rm -rf {} + 2>/dev/null || true
+	rm -rf .pytest_cache .coverage htmlcov dist build

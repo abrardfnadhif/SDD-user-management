@@ -27,16 +27,23 @@ python3.11 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
-pip install -r requirements-dev.txt
+make install
+# or: pip install -r requirements-dev.txt
 
-# Run tests
-pytest
+# Code quality (zero-error policy)
+make lint              # Run ruff linter
+make lint-fix          # Auto-fix linting issues
+make format            # Format code with black
+make format-check      # Check formatting
+make type-check        # Run mypy type checking
+make validate          # Run all checks (type + lint + format)
 
-# Run linter
-ruff check .
+# Testing
+make test              # Run tests
+make test-cov          # Run tests with coverage report
 
-# Format code
-black .
+# Cleanup
+make clean             # Remove build artifacts
 ```
 
 ### One-line Dev Setup
