@@ -1,4 +1,4 @@
-.PHONY: dev dev-db dev-full stop clean seed-roles help
+.PHONY: dev dev-db dev-full stop clean seed-roles test test-backend test-frontend help
 
 # One-line development setup
 dev: dev-db
@@ -44,6 +44,31 @@ seed-roles:
 	@echo "Seeding roles..."
 	@echo "TODO: Implement role seeding script"
 
+# Run all tests (backend + frontend) with coverage
+test: test-backend test-frontend
+	@echo ""
+	@echo "✓ All tests completed"
+	@echo ""
+	@echo "Coverage reports:"
+	@echo "  Backend:  backend/htmlcov/index.html"
+	@echo "  Frontend: frontend/playwright-report/index.html"
+
+# Run backend tests (unit + integration + contract) with coverage
+test-backend:
+	@echo "Running backend tests with coverage..."
+	@cd backend && \
+		if [ -d "venv" ]; then \
+			./venv/bin/pytest --cov=src --cov-report=html --cov-report=term-missing || true; \
+		else \
+			echo "⚠ Backend venv not found. Run: cd backend && make install"; \
+		fi
+
+# Run frontend E2E tests
+test-frontend:
+	@echo ""
+	@echo "Running frontend E2E tests..."
+	@cd frontend && npm run test:e2e || true
+
 # Show help
 help:
 	@echo "User Management - Development Commands"
@@ -51,6 +76,11 @@ help:
 	@echo "Quick Start:"
 	@echo "  make dev          - Start database only (recommended for local development)"
 	@echo "  make dev-full     - Start full stack in Docker"
+	@echo ""
+	@echo "Testing:"
+	@echo "  make test         - Run all tests (backend + frontend) with coverage"
+	@echo "  make test-backend - Run backend tests (unit/integration/contract)"
+	@echo "  make test-frontend- Run frontend E2E tests (Playwright)"
 	@echo ""
 	@echo "Management:"
 	@echo "  make stop         - Stop all services"

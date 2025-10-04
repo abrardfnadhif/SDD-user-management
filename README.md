@@ -80,6 +80,29 @@ openssl rand -base64 32
 - Email service needs: Send transactional emails
 - Redis (optional): Read/write for distributed rate limiting
 
+## Testing
+
+Run all tests with coverage in one command:
+
+```bash
+make test
+```
+
+This will:
+- Run backend tests (unit, integration, contract) with pytest coverage
+- Run frontend E2E tests with Playwright
+- Generate HTML coverage reports
+
+Individual test commands:
+```bash
+make test-backend   # Backend only (pytest with coverage)
+make test-frontend  # Frontend E2E only (Playwright)
+```
+
+Coverage reports:
+- Backend: `backend/htmlcov/index.html`
+- Frontend: `frontend/playwright-report/index.html`
+
 ## Development
 
 See individual README files:
