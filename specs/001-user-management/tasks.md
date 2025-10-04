@@ -36,7 +36,7 @@
 - [x] T023 [P] Integration test: Login with 2FA (success + rate limit on failures) in `backend/tests/integration/test_2fa_flow.py` (qa)
 - [x] T024 [P] Integration test: RBAC role change and access checks in `backend/tests/integration/test_rbac.py` (qa)
 - [x] T025 [P] Integration test: Account deletion schedule and cancellation window in `backend/tests/integration/test_account_deletion.py` (qa)
-- [ ] T026 [P] Frontend E2E: auth and profile flows in `frontend/tests/e2e/auth.spec.ts` (qa)
+- [x] T026 [P] Frontend E2E: auth and profile flows in `frontend/tests/e2e/auth.spec.ts` (qa)
 
 ## Phase 3.3: Core Implementation (Backend)
 - [ ] T027 [P] Create DB session and config in `backend/src/db/session.py` (db)
