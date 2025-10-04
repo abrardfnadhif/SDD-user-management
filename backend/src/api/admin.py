@@ -188,3 +188,50 @@ async def change_user_role(
         "roles": new_roles,
         "message": message,
     }
+
+
+@router.post("/{user_id}/cancel-deletion")
+async def cancel_deletion(
+    user_id: str,
+    admin_id: str,  # TODO: Get from JWT token
+    db: AsyncSession = Depends(get_db),
+):
+    """Cancel scheduled deletion (admin only) - T041: 14-day cancellation window"""
+    await verify_admin(admin_id, db)
+
+    user = await UserService.get_user_by_id(db, uuid.UUID(user_id))
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found",
+        )
+
+    if not user.deletion_scheduled_at:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="No deletion scheduled for this user",
+        )
+
+    # Check if within 14-day cancellation window
+    from datetime import datetime, timedelta
+    scheduled_date = user.deletion_scheduled_at
+    cancellation_deadline = scheduled_date + timedelta(days=14)
+    
+    if datetime.utcnow() > cancellation_deadline:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Cancellation window (14 days) has expired",
+        )
+
+    # Cancel deletion
+    user = await UserService.cancel_deletion(db, user)
+
+    # Log cancellation
+    await AuditLogService.log_admin_action(
+        db, uuid.UUID(admin_id), "CANCEL_DELETION", user.id
+    )
+
+    return {
+        "message": "Deletion cancelled",
+        "deletion_cancelled": True,
+    }
