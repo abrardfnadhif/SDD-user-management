@@ -9,7 +9,7 @@
 - Mark `[P]` only for different files with no dependencies
 
 ## Phase 3.1: Setup (Project setup & environment)
-- [ ] T001 Create project structure per plan (backend/, frontend/, specs/) at `/Users/abrar.d.f.nadhif/project/SDD-FS/` (devops)
+- [x] T001 Create project structure per plan (backend/, frontend/, specs/) at `/Users/abrar.d.f.nadhif/project/SDD-FS/` (devops)
 - [ ] T002 Initialize backend Python project; add FastAPI, pydantic, JWT, psycopg, test deps in `backend/` (devops)
 - [ ] T003 Initialize frontend Next.js TypeScript app; add Tailwind, shadcn/ui in `frontend/` (devops)
 - [ ] T004 [P] Configure ESLint/Prettier and zero-error policy for frontend in `frontend/.eslintrc` and `frontend/package.json` (devops)
