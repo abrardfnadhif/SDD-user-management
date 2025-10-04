@@ -49,7 +49,7 @@
 - [x] T034 Implement AuditLogService append-only writes in `backend/src/services/audit_log_service.py` (backend)
 - [x] T035 Implement rate limiting middleware (5 failed/15m/IP) in `backend/src/middleware/rate_limit.py` (backend)
 - [x] T036 Implement security headers middleware (CSP/HSTS/X-Frame-Options/nosniff/Referrer-Policy) in `backend/src/middleware/security_headers.py` (backend)
-- [ ] T037 Implement auth endpoints in `backend/src/api/auth.py` (register, login, refresh, 2fa enable/verify) (backend)
+- [x] T037 Implement auth endpoints in `backend/src/api/auth.py` (register, login, refresh, 2fa enable/verify) (backend)
 - [ ] T038 Implement profile endpoints in `backend/src/api/profile.py` (GET/PUT) (backend)
 - [ ] T039 Implement admin user endpoints in `backend/src/api/admin.py` (GET/PUT/DELETE, POST role) (backend)
 - [ ] T040 Enforce last-admin rule in admin endpoints (cannot delete/demote last Admin) in `backend/src/api/admin.py` (backend)
