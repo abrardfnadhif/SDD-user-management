@@ -47,7 +47,34 @@
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+### Code Quality Standards (Principle I)
+- [ ] Type safety strategy defined (TypeScript/Python type hints/etc.)
+- [ ] Linting tools identified and configured
+- [ ] Code review process established
+- [ ] Function size limits enforced (<50 lines)
+- [ ] DRY principles applied in design
+
+### Test-Driven Development (Principle II - NON-NEGOTIABLE)
+- [ ] Test types identified (unit, integration, contract, E2E)
+- [ ] Test coverage targets set (≥80% overall, 100% critical paths)
+- [ ] TDD workflow enforced (tests before implementation)
+- [ ] Critical paths identified for 100% coverage
+
+### User Experience Consistency (Principle III)
+- [ ] Component library selected (shadcn/ui, Material-UI, etc.)
+- [ ] Responsive breakpoints defined (mobile/tablet/desktop)
+- [ ] Accessibility requirements specified (WCAG 2.1 AA)
+- [ ] Error handling patterns defined
+- [ ] Loading state strategy established
+- [ ] Form validation approach specified
+
+### Performance Requirements (Principle IV)
+- [ ] API response time targets set (p50/p95 benchmarks)
+- [ ] Frontend performance metrics defined (FCP, TTI, Lighthouse)
+- [ ] Database indexing strategy planned
+- [ ] Bundle size limits established
+- [ ] Scalability target defined (concurrent users)
+- [ ] No N+1 query patterns in design
 
 ## Project Structure
 
@@ -216,4 +243,4 @@ directories captured above]
 - [ ] Complexity deviations documented
 
 ---
-*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
+*Based on Constitution v1.0.0 - See `.specify/memory/constitution.md`*

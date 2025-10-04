@@ -1,50 +1,155 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+SYNC IMPACT REPORT
+==================
+Version: 0.0.0 → 1.0.0
+Date: 2025-10-04
+
+Modified Principles:
+- NEW: I. Code Quality Standards
+- NEW: II. Test-Driven Development (NON-NEGOTIABLE)
+- NEW: III. User Experience Consistency
+- NEW: IV. Performance Requirements
+
+Added Sections:
+- Core Principles (4 principles)
+- Quality Gates
+- Development Workflow
+- Governance
+
+Templates Status:
+- ✅ plan-template.md: Constitution Check section aligns with new principles
+- ✅ spec-template.md: Requirements sections support UX and performance specs
+- ✅ tasks-template.md: TDD workflow enforced in Phase 3.2
+
+Follow-up TODOs:
+- None - all placeholders resolved
+-->
+
+# User Management App Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Code Quality Standards
+**All code MUST meet the following quality criteria:**
+- **Readability**: Code is written for humans first. Use descriptive names, clear structure, and appropriate comments for complex logic.
+- **Maintainability**: Follow DRY (Don't Repeat Yourself). Extract reusable functions and modules. Maximum function length: 50 lines.
+- **Type Safety**: Use static typing where available (TypeScript for frontend, type hints for Python, etc.). All public APIs MUST have type annotations.
+- **Linting**: Zero linting errors allowed. Configure and enforce linters (ESLint, Pylint, etc.) in CI/CD.
+- **Code Review**: All changes require peer review. Reviewer MUST verify adherence to these standards.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+**Rationale**: User management involves sensitive data. Clean, maintainable code reduces bugs and security vulnerabilities.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Test-Driven Development (NON-NEGOTIABLE)
+**TDD is mandatory for all features:**
+- **Red-Green-Refactor**: Write failing test → Implement minimum code to pass → Refactor while keeping tests green.
+- **Test Coverage**: Minimum 80% code coverage. Critical paths (authentication, authorization, data validation) MUST have 100% coverage.
+- **Test Types Required**:
+  - **Unit Tests**: All business logic, validation functions, utilities
+  - **Integration Tests**: API endpoints, database operations, authentication flows
+  - **Contract Tests**: API request/response schemas
+  - **E2E Tests**: Critical user journeys (registration, login, profile update)
+- **Test Execution Order**: Tests MUST be written and approved before implementation begins.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**Rationale**: User management systems handle authentication and personal data. Bugs can lead to security breaches. TDD ensures correctness from the start.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. User Experience Consistency
+**All user-facing features MUST provide consistent, intuitive experiences:**
+- **Design System**: Use a single component library (e.g., shadcn/ui, Material-UI). No custom components without justification.
+- **Responsive Design**: All interfaces MUST work on mobile (320px), tablet (768px), and desktop (1920px) viewports.
+- **Accessibility**: WCAG 2.1 Level AA compliance required. All interactive elements keyboard-navigable, proper ARIA labels, color contrast ratios met.
+- **Error Handling**: User-friendly error messages. No technical jargon or stack traces shown to users. Provide actionable guidance.
+- **Loading States**: All async operations MUST show loading indicators. No blank screens or frozen UI.
+- **Form Validation**: Real-time validation with clear error messages. Indicate required fields. Preserve user input on errors.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Rationale**: User management is often the first interaction users have with the system. Poor UX leads to frustration and abandonment.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Performance Requirements
+**All features MUST meet these performance benchmarks:**
+- **API Response Time**: 
+  - p50 < 100ms for read operations
+  - p95 < 200ms for read operations
+  - p95 < 500ms for write operations
+- **Frontend Performance**:
+  - First Contentful Paint (FCP) < 1.5s
+  - Time to Interactive (TTI) < 3.5s
+  - Lighthouse Performance score ≥ 90
+- **Database Queries**: 
+  - No N+1 queries. Use eager loading or batch queries.
+  - All queries on user tables MUST use indexed columns
+  - Query execution time < 50ms for simple lookups
+- **Bundle Size**: 
+  - Initial JavaScript bundle < 200KB (gzipped)
+  - Code splitting for routes and heavy components
+- **Scalability**: System MUST handle 1,000 concurrent users without degradation.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**Rationale**: User management operations (login, profile load) are frequent. Slow performance directly impacts user satisfaction and system usability.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Quality Gates
+**All features MUST pass these gates before deployment:**
+
+### Gate 1: Code Quality
+- [ ] Zero linting errors
+- [ ] Zero type errors
+- [ ] Code review approved by at least one peer
+- [ ] No code duplication (DRY violations)
+- [ ] All functions under 50 lines
+
+### Gate 2: Testing
+- [ ] All tests passing (unit, integration, contract, E2E)
+- [ ] Code coverage ≥ 80% overall
+- [ ] Critical paths at 100% coverage
+- [ ] No skipped or disabled tests without documented justification
+
+### Gate 3: User Experience
+- [ ] Responsive design verified on 3 viewport sizes
+- [ ] Accessibility audit passed (WCAG 2.1 AA)
+- [ ] All forms have validation and error handling
+- [ ] Loading states implemented for async operations
+- [ ] Manual UX testing completed
+
+### Gate 4: Performance
+- [ ] API response times meet benchmarks (load tested)
+- [ ] Frontend Lighthouse score ≥ 90
+- [ ] No N+1 queries detected
+- [ ] Bundle size under limits
+- [ ] Database indexes verified
+
+## Development Workflow
+
+### Feature Development Process
+1. **Specification**: Create feature spec using `/specify` workflow. Mark all ambiguities.
+2. **Planning**: Run `/plan` workflow. Generate design docs, contracts, and tests.
+3. **Constitution Check**: Verify no principle violations. Document justified exceptions in Complexity Tracking.
+4. **Test Creation**: Write all tests (contract, integration, unit). Tests MUST fail.
+5. **Implementation**: Write minimum code to pass tests. Refactor while keeping tests green.
+6. **Quality Gates**: Pass all four gates before requesting review.
+7. **Peer Review**: Reviewer verifies constitutional compliance and gate passage.
+8. **Deployment**: Merge only after approval and successful CI/CD pipeline.
+
+### Complexity Justification
+Any deviation from constitutional principles MUST be documented in the feature's `plan.md` Complexity Tracking section with:
+- What principle is violated
+- Why the violation is necessary
+- What simpler alternatives were considered and why they were rejected
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### Constitutional Authority
+- This constitution supersedes all other development practices and guidelines.
+- All feature specifications, implementation plans, and code reviews MUST verify constitutional compliance.
+- Violations without documented justification are grounds for rejecting pull requests.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### Amendment Process
+- Amendments require documentation of: (1) rationale, (2) impact analysis, (3) migration plan for existing code.
+- Version bumping rules:
+  - **MAJOR**: Removing or redefining core principles, backward-incompatible changes
+  - **MINOR**: Adding new principles or sections, expanding requirements
+  - **PATCH**: Clarifications, wording improvements, non-semantic changes
+- All amendments MUST update dependent templates (plan, spec, tasks) for consistency.
+
+### Compliance Review
+- Constitution compliance is checked at two points in `/plan` workflow: before Phase 0 research and after Phase 1 design.
+- Failed compliance checks block progression unless violations are justified in Complexity Tracking.
+- Periodic audits of existing codebase recommended to ensure ongoing compliance.
+
+**Version**: 1.0.0 | **Ratified**: 2025-10-04 | **Last Amended**: 2025-10-04
