@@ -82,6 +82,16 @@ openssl rand -base64 32
 
 ## Testing
 
+### First Time Setup
+
+Install Playwright browsers (one-time):
+```bash
+cd frontend
+npx playwright install
+```
+
+### Run All Tests
+
 Run all tests with coverage in one command:
 
 ```bash
@@ -102,6 +112,8 @@ make test-frontend  # Frontend E2E only (Playwright)
 Coverage reports:
 - Backend: `backend/htmlcov/index.html`
 - Frontend: `frontend/playwright-report/index.html`
+
+**Note**: Test results are gitignored as they are generated artifacts.
 
 ## Development
 
