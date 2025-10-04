@@ -45,7 +45,7 @@
 - [x] T030 [P] Implement UserService in `backend/src/services/user_service.py` (backend)
 - [x] T031 [P] Implement AuthService (password auth, JWT issue, session revoke) in `backend/src/services/auth_service.py` (backend)
 - [x] T032 [P] Implement MFAService (TOTP, backup codes) in `backend/src/services/mfa_service.py` (backend)
-- [ ] T033 Implement RBACService policy checks in `backend/src/services/rbac_service.py` (backend)
+- [x] T033 Implement RBACService policy checks in `backend/src/services/rbac_service.py` (backend)
 - [ ] T034 Implement AuditLogService append-only writes in `backend/src/services/audit_log_service.py` (backend)
 - [ ] T035 Implement rate limiting middleware (5 failed/15m/IP) in `backend/src/middleware/rate_limit.py` (backend)
 - [ ] T036 Implement security headers middleware (CSP/HSTS/X-Frame-Options/nosniff/Referrer-Policy) in `backend/src/middleware/security_headers.py` (backend)
