@@ -15,10 +15,10 @@
 - [x] T004 [P] Configure ESLint/Prettier and zero-error policy for frontend in `frontend/.eslintrc` and `frontend/package.json` (devops)
 - [x] T005 [P] Configure ruff/flake8 or linters for backend in `backend/pyproject.toml` with function length guidance (devops)
 - [x] T006 Create `.env.sample` for backend and frontend; document secrets in `README.md` (devops)
-- [ ] T007 Create `docker-compose.yml` for postgres, backend, (optional) reverse proxy at repo root (devops)
-- [ ] T008 Add Makefile scripts: `make dev` one-liner to start services and seed roles at `/Users/abrar.d.f.nadhif/project/SDD-FS/Makefile` (devops)
-- [ ] T009 Add base pages and routes: `/login`, `/register`, `/profile`, `/admin/users` in `frontend/src/pages/*.tsx` (frontend)
-- [ ] T010 Add API client with centralized error handling at `frontend/src/services/apiClient.ts` (frontend)
+- [x] T007 Create `docker-compose.yml` for postgres, backend, (optional) reverse proxy at repo root (devops)
+- [x] T008 Add Makefile scripts: `make dev` one-liner to start services and seed roles at `/Users/abrar.d.f.nadhif/project/SDD-FS/Makefile` (devops)
+- [x] T009 Add base pages and routes: `/login`, `/register`, `/profile`, `/admin/users` in `frontend/src/pages/*.tsx` (frontend)
+- [x] T010 Add API client with centralized error handling at `frontend/src/services/apiClient.ts` (frontend)
 
 ## Phase 3.2: Tests First (TDD) — Contract & Integration Tests
 - [ ] T011 [P] Contract test POST /api/register in `backend/tests/contract/test_register_post.py` (qa)
