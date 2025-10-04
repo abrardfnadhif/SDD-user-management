@@ -21,7 +21,7 @@
 - [x] T010 Add API client with centralized error handling at `frontend/src/services/apiClient.ts` (frontend)
 
 ## Phase 3.2: Tests First (TDD) — Contract & Integration Tests
-- [ ] T011 [P] Contract test POST /api/register in `backend/tests/contract/test_register_post.py` (qa)
+- [x] T011 [P] Contract test POST /api/register in `backend/tests/contract/test_register_post.py` (qa)
 - [ ] T012 [P] Contract test POST /api/login in `backend/tests/contract/test_login_post.py` (qa)
 - [ ] T013 [P] Contract test POST /api/token/refresh in `backend/tests/contract/test_refresh_post.py` (qa)
 - [ ] T014 [P] Contract test POST /api/2fa/enable in `backend/tests/contract/test_2fa_enable_post.py` (qa)
