@@ -32,7 +32,7 @@
 - [x] T019 [P] Contract test PUT /api/admin/users/{id} in `backend/tests/contract/test_admin_users_put.py` (qa)
 - [x] T020 [P] Contract test DELETE /api/admin/users/{id} in `backend/tests/contract/test_admin_users_delete.py` (qa)
 - [x] T021 [P] Contract test POST /api/admin/users/{id}/role in `backend/tests/contract/test_admin_users_role_post.py` (qa)
-- [ ] T022 [P] Integration test: Registration → Email verification → Login → Profile update in `backend/tests/integration/test_user_flow.py` (qa)
+- [x] T022 [P] Integration test: Registration → Email verification → Login → Profile update in `backend/tests/integration/test_user_flow.py` (qa)
 - [ ] T023 [P] Integration test: Login with 2FA (success + rate limit on failures) in `backend/tests/integration/test_2fa_flow.py` (qa)
 - [ ] T024 [P] Integration test: RBAC role change and access checks in `backend/tests/integration/test_rbac.py` (qa)
 - [ ] T025 [P] Integration test: Account deletion schedule and cancellation window in `backend/tests/integration/test_account_deletion.py` (qa)
