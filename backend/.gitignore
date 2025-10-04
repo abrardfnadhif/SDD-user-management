@@ -31,6 +31,8 @@ ENV/
 .coverage
 htmlcov/
 .tox/
+coverage.xml
+test-results/
 
 # IDE
 .vscode/

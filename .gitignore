@@ -1,0 +1,23 @@
+# Test Results & Coverage Reports
+# Backend
+backend/htmlcov/
+backend/.coverage
+backend/.pytest_cache/
+backend/coverage.xml
+backend/test-results/
+
+# Frontend
+frontend/playwright-report/
+frontend/test-results/
+frontend/.playwright/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
