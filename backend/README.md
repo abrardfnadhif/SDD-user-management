@@ -19,4 +19,25 @@ FastAPI-based backend for secure user management.
 - pytest + httpx for testing
 
 ## Setup
-See root `Makefile` for one-line dev setup.
+
+### Quick Start
+```bash
+# Create virtual environment
+python3.11 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements-dev.txt
+
+# Run tests
+pytest
+
+# Run linter
+ruff check .
+
+# Format code
+black .
+```
+
+### One-line Dev Setup
+See root `Makefile` for automated setup with database and services.
