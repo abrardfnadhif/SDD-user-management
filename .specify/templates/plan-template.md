@@ -76,6 +76,37 @@
 - [ ] Scalability target defined (concurrent users)
 - [ ] No N+1 query patterns in design
 
+### Security-First Architecture (Principle V - NON-NEGOTIABLE)
+- [ ] Authentication strategy defined (JWT with secure cookies)
+- [ ] Authorization model specified (RBAC)
+- [ ] Password security requirements met (bcrypt, complexity, history)
+- [ ] Rate limiting strategy for sensitive endpoints
+- [ ] Input validation approach defined (server-side)
+- [ ] SQL injection prevention (parameterized queries)
+- [ ] XSS prevention strategy (output encoding)
+- [ ] CSRF protection mechanism selected
+- [ ] Security headers planned (CSP, HSTS, X-Frame-Options)
+- [ ] HTTPS/TLS 1.3 enforcement
+- [ ] 2FA implementation approach (TOTP, backup codes)
+- [ ] Security logging strategy (auth events, failures, access)
+- [ ] Secrets management approach (env vars, secrets manager)
+- [ ] Dependency vulnerability scanning in CI/CD
+- [ ] Security testing plan (SAST, DAST, penetration testing)
+
+### Data Privacy & Compliance (Principle VI - NON-NEGOTIABLE)
+- [ ] Data minimization applied (only necessary fields)
+- [ ] PII encryption strategy (at rest: AES-256, in transit: TLS 1.3)
+- [ ] Data retention policy defined
+- [ ] Account deletion workflow designed (anonymization)
+- [ ] User data export functionality planned (GDPR right to access)
+- [ ] Privacy policy drafted
+- [ ] Terms of service drafted
+- [ ] Consent management approach defined
+- [ ] Audit logging strategy (data access, modifications)
+- [ ] GDPR compliance verified (all rights addressed)
+- [ ] CCPA compliance verified (disclosure, deletion)
+- [ ] Third-party data sharing policy (none without consent)
+
 ## Project Structure
 
 ### Documentation (this feature)
@@ -243,4 +274,4 @@ directories captured above]
 - [ ] Complexity deviations documented
 
 ---
-*Based on Constitution v1.0.0 - See `.specify/memory/constitution.md`*
+*Based on Constitution v1.1.0 - See `.specify/memory/constitution.md`*

@@ -1,28 +1,28 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version: 0.0.0 → 1.0.0
+Version: 1.0.0 → 1.1.0
 Date: 2025-10-04
 
 Modified Principles:
-- NEW: I. Code Quality Standards
-- NEW: II. Test-Driven Development (NON-NEGOTIABLE)
-- NEW: III. User Experience Consistency
-- NEW: IV. Performance Requirements
+- RETAINED: I. Code Quality Standards
+- RETAINED: II. Test-Driven Development (NON-NEGOTIABLE)
+- RETAINED: III. User Experience Consistency
+- RETAINED: IV. Performance Requirements
+- NEW: V. Security-First Architecture (NON-NEGOTIABLE)
+- NEW: VI. Data Privacy & Compliance (NON-NEGOTIABLE)
 
 Added Sections:
-- Core Principles (4 principles)
-- Quality Gates
-- Development Workflow
-- Governance
+- Security & Compliance Gates (Gate 5 & 6)
+- Security audit requirements in Development Workflow
 
 Templates Status:
-- ✅ plan-template.md: Constitution Check section aligns with new principles
-- ✅ spec-template.md: Requirements sections support UX and performance specs
-- ✅ tasks-template.md: TDD workflow enforced in Phase 3.2
+- ✅ plan-template.md: Constitution Check updated with Principles V & VI
+- ✅ spec-template.md: Requirements sections support security and compliance specs
+- ✅ tasks-template.md: TDD workflow supports security testing
 
 Follow-up TODOs:
-- None - all placeholders resolved
+- None - all templates synchronized
 -->
 
 # User Management App Constitution
@@ -84,6 +84,98 @@ Follow-up TODOs:
 
 **Rationale**: User management operations (login, profile load) are frequent. Slow performance directly impacts user satisfaction and system usability.
 
+### V. Security-First Architecture (NON-NEGOTIABLE)
+**All features MUST implement defense-in-depth security:**
+- **Authentication & Authorization**:
+  - JWT tokens with secure cookie management (HttpOnly, Secure, SameSite=Strict)
+  - Token expiration: Access tokens ≤15 minutes, refresh tokens ≤7 days
+  - Rate limiting: 5 failed login attempts per 15 minutes per IP
+  - Role-Based Access Control (RBAC) enforced at API and UI layers
+  - Session invalidation on password change or suspicious activity
+- **Password Security**:
+  - bcrypt hashing with minimum work factor of 12
+  - Minimum password requirements: 12 characters, mixed case, numbers, special chars
+  - Password history: prevent reuse of last 5 passwords
+  - Secure password reset with time-limited tokens (15 minutes)
+- **Two-Factor Authentication (2FA)**:
+  - TOTP support (Google Authenticator, Authy)
+  - Backup codes (10 single-use codes, securely hashed)
+  - 2FA required for admin accounts, optional for users
+- **Input Validation & Sanitization**:
+  - Validate all inputs server-side (never trust client)
+  - Parameterized queries ONLY (prevent SQL injection)
+  - Context-aware output encoding (prevent XSS)
+  - File upload restrictions: type validation, size limits, virus scanning
+- **Transport & Communication Security**:
+  - HTTPS/TLS 1.3 ONLY (no HTTP fallback)
+  - HSTS header with max-age=31536000, includeSubDomains
+  - Certificate pinning for mobile apps
+- **Security Headers**:
+  - Content-Security-Policy (CSP) with strict directives
+  - X-Frame-Options: DENY
+  - X-Content-Type-Options: nosniff
+  - Referrer-Policy: strict-origin-when-cross-origin
+- **CSRF Protection**:
+  - Double-submit cookie pattern or synchronizer tokens
+  - SameSite cookie attribute
+  - Verify Origin/Referer headers
+- **Logging & Monitoring**:
+  - Log all authentication events (success/failure)
+  - Log all authorization failures
+  - Log all data access to sensitive resources
+  - Real-time alerting for suspicious patterns
+  - Log retention: 90 days minimum
+  - Never log passwords, tokens, or PII in plain text
+- **Security Testing**:
+  - Automated security scanning in CI/CD (SAST, DAST)
+  - Dependency vulnerability scanning (Snyk, Dependabot)
+  - Penetration testing before major releases
+  - Security code review for all authentication/authorization changes
+
+**Rationale**: User management systems are high-value targets for attackers. A single security breach can compromise all user accounts and data. Defense-in-depth ensures multiple layers of protection.
+
+### VI. Data Privacy & Compliance (NON-NEGOTIABLE)
+**All features MUST respect user privacy and comply with regulations:**
+- **Data Minimization**:
+  - Collect only necessary data (full name, email, password, role)
+  - Optional fields clearly marked (date of birth)
+  - No tracking or analytics without explicit consent
+- **Data Retention & Deletion**:
+  - User-initiated account deletion within 30 days
+  - Data anonymization (replace PII with random values)
+  - Secure data erasure (overwrite deleted data)
+  - Backup retention: 90 days, then permanent deletion
+- **GDPR Compliance**:
+  - Right to access: Users can download all their data (JSON/CSV)
+  - Right to rectification: Users can update their profile
+  - Right to erasure: Users can delete their account
+  - Right to portability: Data export in machine-readable format
+  - Consent management: Explicit opt-in for non-essential processing
+  - Data breach notification: Within 72 hours
+- **CCPA Compliance**:
+  - Privacy policy with data collection disclosure
+  - "Do Not Sell My Personal Information" option
+  - Data deletion requests honored within 45 days
+- **Privacy by Design**:
+  - Encrypt PII at rest (AES-256)
+  - Encrypt PII in transit (TLS 1.3)
+  - Database column-level encryption for sensitive fields
+  - Separate PII from operational data where possible
+- **Audit Trail**:
+  - Log all data access, modifications, deletions
+  - Immutable audit logs (append-only)
+  - Admin actions fully auditable
+- **Third-Party Data Sharing**:
+  - No third-party data sharing without explicit consent
+  - Data Processing Agreements (DPAs) with all vendors
+  - Regular vendor security assessments
+- **User Transparency**:
+  - Clear privacy policy (plain language, no legalese)
+  - Terms of service with update notifications
+  - Data usage transparency (what, why, how long)
+
+**Rationale**: Privacy regulations (GDPR, CCPA) carry severe penalties for non-compliance. User trust depends on transparent, respectful data handling. Privacy breaches cause irreparable reputational damage.
+
 ## Quality Gates
 **All features MUST pass these gates before deployment:**
 
@@ -114,17 +206,49 @@ Follow-up TODOs:
 - [ ] Bundle size under limits
 - [ ] Database indexes verified
 
+### Gate 5: Security (NON-NEGOTIABLE)
+- [ ] Authentication/authorization implemented correctly
+- [ ] Password security requirements met (bcrypt, complexity)
+- [ ] Rate limiting configured for sensitive endpoints
+- [ ] All inputs validated and sanitized server-side
+- [ ] Parameterized queries used (no SQL injection risk)
+- [ ] XSS prevention implemented (output encoding)
+- [ ] CSRF protection enabled
+- [ ] Security headers configured (CSP, HSTS, X-Frame-Options, etc.)
+- [ ] HTTPS/TLS 1.3 enforced
+- [ ] Secrets not hardcoded (use environment variables/secrets manager)
+- [ ] Security logging implemented (auth events, failures, access)
+- [ ] Dependency vulnerabilities scanned and resolved
+- [ ] SAST/DAST scans passed
+- [ ] Security code review completed
+
+### Gate 6: Privacy & Compliance (NON-NEGOTIABLE)
+- [ ] Data minimization applied (only necessary fields collected)
+- [ ] PII encrypted at rest (AES-256)
+- [ ] PII encrypted in transit (TLS 1.3)
+- [ ] User data export functionality implemented
+- [ ] Account deletion functionality implemented
+- [ ] Data anonymization on deletion verified
+- [ ] Privacy policy published and accessible
+- [ ] Terms of service published and accessible
+- [ ] Consent mechanisms implemented where required
+- [ ] Audit logging for data access/modifications
+- [ ] GDPR/CCPA compliance verified
+- [ ] No unauthorized third-party data sharing
+
 ## Development Workflow
 
 ### Feature Development Process
 1. **Specification**: Create feature spec using `/specify` workflow. Mark all ambiguities.
 2. **Planning**: Run `/plan` workflow. Generate design docs, contracts, and tests.
 3. **Constitution Check**: Verify no principle violations. Document justified exceptions in Complexity Tracking.
-4. **Test Creation**: Write all tests (contract, integration, unit). Tests MUST fail.
-5. **Implementation**: Write minimum code to pass tests. Refactor while keeping tests green.
-6. **Quality Gates**: Pass all four gates before requesting review.
-7. **Peer Review**: Reviewer verifies constitutional compliance and gate passage.
-8. **Deployment**: Merge only after approval and successful CI/CD pipeline.
+4. **Security Review**: For authentication/authorization features, conduct threat modeling.
+5. **Test Creation**: Write all tests (contract, integration, unit, security). Tests MUST fail.
+6. **Implementation**: Write minimum code to pass tests. Refactor while keeping tests green.
+7. **Quality Gates**: Pass all six gates before requesting review.
+8. **Peer Review**: Reviewer verifies constitutional compliance and gate passage.
+9. **Security Audit**: For major releases, conduct penetration testing.
+10. **Deployment**: Merge only after approval and successful CI/CD pipeline.
 
 ### Complexity Justification
 Any deviation from constitutional principles MUST be documented in the feature's `plan.md` Complexity Tracking section with:
@@ -152,4 +276,4 @@ Any deviation from constitutional principles MUST be documented in the feature's
 - Failed compliance checks block progression unless violations are justified in Complexity Tracking.
 - Periodic audits of existing codebase recommended to ensure ongoing compliance.
 
-**Version**: 1.0.0 | **Ratified**: 2025-10-04 | **Last Amended**: 2025-10-04
+**Version**: 1.1.0 | **Ratified**: 2025-10-04 | **Last Amended**: 2025-10-04
