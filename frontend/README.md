@@ -16,4 +16,35 @@ Next.js TypeScript frontend for secure user management.
 - Jest + Playwright for testing
 
 ## Setup
-See root `Makefile` for one-line dev setup.
+
+### Quick Start
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Run production server
+npm start
+
+# Run linter
+npm run lint
+```
+
+### One-line Dev Setup
+See root `Makefile` for automated setup with backend and database.
+
+### Adding shadcn/ui Components
+```bash
+npx shadcn@latest add button
+npx shadcn@latest add form
+npx shadcn@latest add input
+# etc.
+```
+
+## Development
+Open [http://localhost:3000](http://localhost:3000) to view the app.
