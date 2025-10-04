@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     """Application configuration from environment"""
 
     # Database
-    database_url: str = "postgresql+psycopg://user_mgmt:dev_password@localhost:5432/user_management"
+    database_url: str
     database_pool_size: int = 10
     database_max_overflow: int = 20
     
