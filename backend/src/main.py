@@ -6,6 +6,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.middleware.rate_limit import RateLimitMiddleware
 from src.middleware.security_headers import SecurityHeadersMiddleware
 from src.api import auth, profile, admin
+from src.db.session import settings
+
+# Environment-based documentation URLs
+docs_url = "/docs" if settings.enable_docs else None
+redoc_url = "/redoc" if settings.enable_docs else None
+openapi_url = "/openapi.json" if settings.enable_docs else None
 
 app = FastAPI(
     title="User Management API",
@@ -34,13 +40,13 @@ app = FastAPI(
     - Privacy (VI): Audit logs, GDPR compliance
     """,
     version="0.1.0",
-    docs_url="/docs",  # Swagger UI
-    redoc_url="/redoc",  # ReDoc
-    openapi_url="/openapi.json",
+    docs_url=docs_url,
+    redoc_url=redoc_url,
+    openapi_url=openapi_url,
 )
 
 # Add middleware
-app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(SecurityHeadersMiddleware, enable_docs=settings.enable_docs)
 app.add_middleware(RateLimitMiddleware)
 
 # CORS configuration

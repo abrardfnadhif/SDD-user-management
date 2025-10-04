@@ -12,11 +12,16 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    """Database configuration from environment"""
+    """Application configuration from environment"""
 
+    # Database
     database_url: str = "postgresql+psycopg://user_mgmt:dev_password@localhost:5432/user_management"
     database_pool_size: int = 10
     database_max_overflow: int = 20
+    
+    # Application
+    app_env: str = "development"
+    enable_docs: bool = True
 
     class Config:
         env_file = ".env"
